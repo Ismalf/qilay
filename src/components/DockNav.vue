@@ -26,7 +26,7 @@ const bottomNavItems = ref([
 </script>
 <template>
     <div class="bottom-nav-bar">
-      <Menubar :model="bottomNavItems" />
+      <Menubar :model="bottomNavItems" breakpoint="475px"/>
     </div>
 </template>
 
