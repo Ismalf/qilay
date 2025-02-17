@@ -1,7 +1,8 @@
 <script setup>
-import Carousel from 'primevue/carousel';
-import Chart from 'primevue/chart';
 
+import Chart from 'primevue/chart';
+import DataTable from 'primevue/datatable';
+import Column from 'primevue/column';
 import { ref, onMounted } from "vue";
 
 onMounted(() => {
@@ -27,12 +28,15 @@ const setChartData = () => {
     };
 };
 const setChartOptions = () => {
+    
     const documentStyle = getComputedStyle(document.documentElement);
     const textColor = documentStyle.getPropertyValue('--p-text-color');
     const textColorSecondary = documentStyle.getPropertyValue('--p-text-muted-color');
     const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
 
     return {
+        responsive:true,
+        maintainAspectRatio: false,
         plugins: {
             legend: {
                 labels: {
@@ -62,60 +66,36 @@ const setChartOptions = () => {
     };
 }
 
-const products = ref([{}]);
-const responsiveOptions = ref([
-    {
-        breakpoint: '1400px',
-        numVisible: 2,
-        numScroll: 1
-    },
-    {
-        breakpoint: '1199px',
-        numVisible: 3,
-        numScroll: 1
-    },
-    {
-        breakpoint: '767px',
-        numVisible: 2,
-        numScroll: 1
-    },
-    {
-        breakpoint: '575px',
-        numVisible: 1,
-        numScroll: 1
-    }
-]);
-
-const getSeverity = (status) => {
-    switch (status) {
-        case 'INSTOCK':
-            return 'success';
-
-        case 'LOWSTOCK':
-            return 'warn';
-
-        case 'OUTOFSTOCK':
-            return 'danger';
-
-        default:
-            return null;
-    }
-};
+const products = ref([
+    {code:1, name: 'Product 1', category: 'Category 1', quantity: 10},
+    {code:2, name: 'Product 2', category: 'Category 2', quantity: 20},
+    {code:3, name: 'Product 3', category: 'Category 3', quantity: 30},
+    {code:4, name: 'Product 4', category: 'Category 4', quantity: 40},
+    {code:4, name: 'Product 4', category: 'Category 4', quantity: 40},
+    {code:4, name: 'Product 4', category: 'Category 4', quantity: 40},
+    {code:4, name: 'Product 4', category: 'Category 4', quantity: 40},
+    
+    ]);
 </script>
 
 <template>
+    
     <div class="dashboard">
-        <img src="../assets/logoqilay-white.svg" class="logo" alt="">
-        <h2>Hello</h2>
-        <div class="summary">
+        <div class="flex h-[10vh] items-center justify-between">
             <p class="income">income</p>
             <p class="outcome">outcome</p>
         </div>
-        <Carousel :value="products" :numVisible="1" :numScroll="3" :responsiveOptions="responsiveOptions">
-            <template #item="chartProps">
-                <Chart type="bar" :data="chartData" :options="chartOptions" />
-            </template>
-        </Carousel>
+        <Chart type="bar" :data="chartData" :options="chartOptions" class="w-full h-[40vh]" />
+       <!--  <div class=" flex justify-center w-full h-[40vh]">
+        </div> -->
+        <h3>Expenses Summary</h3>
+        <div class="h-[30vh] max-w-[50%] overflow-hidden">
+            <DataTable :value="products" >
+                <Column field="name" header="Description"></Column>
+                <Column field="category" header="Amount"></Column>
+            </DataTable>
+            <!-- <div class="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-transparent via-transparent to-transparent backdrop-blur-sm"></div> -->
+        </div>
     </div>
 </template>
 
@@ -131,22 +111,11 @@ const getSeverity = (status) => {
 .dashboard {
     display: flex;
     flex-direction: column;
-    align-items: top;
     justify-content: left;
     height: 100vh;
-    font-size: 20px;
     width: 90vw;
     max-width: 700px;
     justify-self: center;
 }
 
-.summary {
-    display: flex;
-    justify-content: space-between;
-}
-
-.logo {
-    align-self: center;
-    width: 100px;
-}
 </style>
