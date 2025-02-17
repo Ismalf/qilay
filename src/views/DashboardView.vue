@@ -89,7 +89,7 @@ const products = ref([
        <!--  <div class=" flex justify-center w-full h-[40vh]">
         </div> -->
         <h3>Expenses Summary</h3>
-        <div class="h-[30vh] max-w-[50%] overflow-hidden">
+        <div class="h-[30vh] min-h-[250px] max-w-[50%] overflow-hidden">
             <DataTable :value="products" >
                 <Column field="name" header="Description"></Column>
                 <Column field="category" header="Amount"></Column>
