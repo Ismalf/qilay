@@ -81,7 +81,7 @@ const products = ref([
 <template>
     
     <div class="dashboard">
-        <div class="flex h-[10vh] items-center justify-between">
+        <div class="flex h-[5vh] items-center justify-between">
             <p class="income">income</p>
             <p class="outcome">outcome</p>
         </div>
@@ -96,6 +96,8 @@ const products = ref([
             </DataTable>
             <!-- <div class="absolute bottom-0 left-0 w-full h-8 bg-gradient-to-t from-transparent via-transparent to-transparent backdrop-blur-sm"></div> -->
         </div>
+        
+        
     </div>
 </template>
 
@@ -112,10 +114,12 @@ const products = ref([
     display: flex;
     flex-direction: column;
     justify-content: left;
-    height: 100vh;
+    /* height: 100vh;
+    max-height: 100%; */
     width: 90vw;
     max-width: 700px;
     justify-self: center;
+    padding-bottom: 10vh;
 }
 
 </style>

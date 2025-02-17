@@ -25,10 +25,10 @@ onMounted(() => {
 });
 </script>
 <template>
-    <div class="fixed flex left-0 top-0 w-[100vw] backdrop-blur-md h-[5vh]">
+    <div class="fixed flex z-100 left-0 top-0 w-[100vw] backdrop-blur-lg h-[10vh]">
 
     </div>
-    <div class="font-roboto sticky top-0 left-0 z-50 px-2 py-4 flex items-center h-[5vh] justify-between w-full">
+    <div class="font-roboto sticky top-0 left-0 z-100 px-2 py-4 flex items-center h-[10vh] justify-between w-full">
         <img src="../assets/logo2.svg" class="w-10" alt="">
         <div class="flex items-center justify-between w-[100px]">
             <Button rounded variant="text" @click="toggleTheme">
