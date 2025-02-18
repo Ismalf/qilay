@@ -84,6 +84,9 @@ body {
     'Helvetica Neue',
     sans-serif;
   font-size: 15px;
+  font-family: "Atkinson Hyperlegible Mono", serif;
+  font-optical-sizing: auto;
+  font-style: normal;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;

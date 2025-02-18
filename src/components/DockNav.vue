@@ -17,17 +17,17 @@ let loadComponent = (component) => {
         <div class="flex max-w-[700px] w-full justify-around items-center">
 
             <div class="flex flex-col items-center h-full w-[15%]">
-                <Button icon="pi pi-dollar" rounded class="p-button-rounded p-button-text p-button-lg" variant="text" @click="loadComponent('TheWelcome')" />
+                <Button icon="pi pi-dollar" rounded class="p-button-rounded p-button-text p-button-lg" severity="contrast" variant="text" @click="loadComponent('TheWelcome')" />
             </div>
 
             <!-- Search Icon -->
             <div class="flex flex-col items-center cursor-pointer h-full w-[15%]">
-                <Button icon="pi pi-plus" rounded class="p-button-rounded p-button-text p-button-lg" variant="text" />
+                <Button icon="pi pi-plus" rounded class="p-button-rounded p-button-text p-button-lg" severity="contrast" variant="text" />
             </div>
 
             <!-- Profile Icon -->
             <div class="flex flex-col items-center cursor-pointer h-full w-[15%]">
-                <Button icon="pi pi-cog" rounded class="p-button-rounded p-button-text p-button-lg" variant="text" />
+                <Button icon="pi pi-cog" rounded class="p-button-rounded p-button-text p-button-lg" severity="contrast" variant="text" />
             </div>
         </div>
         <!-- Home Icon -->

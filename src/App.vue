@@ -18,4 +18,6 @@ const setComponent = (component) => {
   <OverlayPage ref="drawerWrapper" />
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>
