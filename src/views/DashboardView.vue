@@ -3,61 +3,15 @@
 import Chart from 'primevue/chart';
 import DataTable from 'primevue/datatable';
 import Column from 'primevue/column';
-import { ref, onMounted } from "vue";
+import { ref, onMounted, computed } from "vue";
 import MeterGroup from 'primevue/metergroup';
 import Card from 'primevue/card';
 import Button from 'primevue/button';
 onMounted(() => {
-    chartData.value = setChartData();
-    chartOptions.value = setChartOptions();
+    
 });
 
-const chartData = ref();
-const chartOptions = ref();
 
-const setChartData = () => {
-    const documentStyle = getComputedStyle(document.documentElement);
-
-    return {
-        datasets: [
-            {
-                data: [11, 16, 7, 3, 14],
-                backgroundColor: [
-                    documentStyle.getPropertyValue('--p-pink-500'),
-                    documentStyle.getPropertyValue('--p-gray-500'),
-                    documentStyle.getPropertyValue('--p-orange-500'),
-                    documentStyle.getPropertyValue('--p-purple-500'),
-                    documentStyle.getPropertyValue('--p-cyan-500')
-                ],
-                label: 'My dataset'
-            }
-        ],
-        labels: ['Pink', 'Gray', 'Orange', 'Purple', 'Cyan']
-    };
-};
-const setChartOptions = () => {
-    const documentStyle = getComputedStyle(document.documentElement);
-    const textColor = documentStyle.getPropertyValue('--p-text-color');
-    const surfaceBorder = documentStyle.getPropertyValue('--p-content-border-color');
-    return { maintainAspectRatio: false, }
-    return {
-        maintainAspectRatio: false,
-        plugins: {
-            legend: {
-                labels: {
-                    color: textColor
-                }
-            }
-        },
-        scales: {
-            r: {
-                grid: {
-                    color: surfaceBorder
-                }
-            }
-        }
-    };
-}
 
 const products = ref([
     { code: 1, name: 'Product 1', category: 'Category 1', quantity: 10 },
@@ -75,26 +29,36 @@ const value = ref([
     { label: 'House', color1: '#dedede', color2: '#c084fc', value: 20, icon: 'pi pi-home' },
     { label: 'Other', color1: '#c084fc', color2: '#c084fc', value: 0, icon: 'pi pi-cog' }
 ]);
+
+import { useIncomeStore } from '@/stores/income';
+const incomeStore = useIncomeStore();
+
+import { useOutcomeStore } from '@/stores/outcome';
+const outcomeStore = useOutcomeStore();
+
+const balance = computed(() => {
+    return incomeStore.incomeRef.amount - outcomeStore.totalOutcome;
+});
 </script>
 
 <template>
 
     <div class="flex flex-col justify-left w-[90vw] pb-[10vh] max-w-[700px] self-center">
-        <h1 class="text-4xl font-bold">Hello! :)</h1>
+        <h1 class="text-3xl font-bold">Hello! :)</h1>
         <div class="grid  grid-cols-2 md:grid-cols-4 gap-4 py-8">
             <div class=" md:col-span-2">
                 <div class="flex flex-col">
                     <h2 class="text-4xl font-bold">Balance</h2>
                     <p class="text-gray-500 dark:text-gray-400">Your current balance</p>
-                    <span class="text-5xl font-bold underline">$ 500.00</span>
+                    <span class="text-5xl font-bold underline">$ {{balance}}</span>
                 </div>
             </div>
             <div class=" md:col-span-2">
                 <div class="flex justify-between items-center ">
                     <div class="flex flex-col w-full items-end">
-                        <span class="text-xl font-bold income">+ $ 1,000.00</span>
-                        <span class="text-gray-500 dark:text-gray-400">Income - 25th Feb</span>
-                        <span class="text-xl font-bold outcome">- $ 500.00</span>
+                        <span class="text-xl font-bold income">+ $ {{incomeStore.incomeRef.amount}}</span>
+                        <span class="text-gray-500 dark:text-gray-400">Income - {{incomeStore.formattedPayday}}</span>
+                        <span class="text-xl font-bold outcome">- $ {{outcomeStore.totalOutcome}}</span>
                         <span class="text-gray-500 dark:text-gray-400">Outcome - up to date</span>
                         <div class="flex justify-end w-full">
                             <Button label="Income" icon="pi pi-plus" variant="text" severity="contrast" class="mt-4" />
@@ -114,15 +78,29 @@ const value = ref([
                 <p>N/A.</p>
             </div> -->
         </div>
+        <Card class="flex-1 border border-surface shadow-none">
+            <template #content>
+                <div class="flex justify-between gap-8">
+                    <div class="flex flex-col gap-1 justify-center">
+                        Upcoming expenses
+                    </div>
+                    <div class="flex flex-col gap-1">
+                        <span class="text-gray-300"> Spotify - Mar. 30th </span>
+                        <span > Netflix +1 - Feb. 25th </span>
+                        <span class="text-gray-300"> Xbox - Jan. 22th </span>
+                    </div>
+                </div>
 
+            </template>
+        </Card>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 py-8">
             <div class="flex flex-col ">
                 <h2 class="text-3xl font-bold">Expenses Summary</h2>
                 <p class="text-gray-500 dark:text-gray-400">Latest purchases</p>
                 <div class="h-[30vh] min-h-[250px]  overflow-hidden">
-                    <DataTable :value="products">
-                        <Column field="name" header="Description"></Column>
-                        <Column field="category" header="Amount"></Column>
+                    <DataTable :value="outcomeStore.outcomeRef">
+                        <Column field="description" header="Description"></Column>
+                        <Column field="amount" header="Amount"></Column>
                     </DataTable>
                 </div>
             </div>

@@ -8,6 +8,10 @@ const openDrawer = (component) => {
     currentComponent.value = component;
     isOpen.value = true;
 };
+
+const closeDrawer = () => {
+    isOpen.value = false;
+};
 defineExpose({
     openDrawer
 });
@@ -21,11 +25,11 @@ defineExpose({
                 <span class="font-bold">Amy Elsner</span>
             </div>
         </template>
-        <component :is="currentComponent" />
+        <component @close="closeDrawer" :is="currentComponent" />
         <template #footer>
-            <div class="flex items-center gap-2">
-                <Button label="Account" icon="pi pi-user" class="flex-auto" outlined></Button>
-                <Button label="Logout" icon="pi pi-sign-out" class="flex-auto" severity="danger" text></Button>
+            <div class="flex flex-col justify-center items-center gap-2">
+                <span class="text-gray-400">Qilay Co. 2025</span>
+                <span class="text-gray-400"><3 Isma</span>
             </div>
         </template>
     </Drawer>

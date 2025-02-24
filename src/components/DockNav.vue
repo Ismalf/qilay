@@ -2,12 +2,14 @@
 import { defineEmits } from 'vue';
 import Button from 'primevue/button';
 import TheWelcome from "./TheWelcome.vue";
+import IncomeReg from './IncomeReg.vue';
 const emit = defineEmits();
 const components = {
-    TheWelcome,
+    IncomeReg,
 };
 
 let loadComponent = (component) => {
+    console.log(component);
     emit('loadComponent', components[component]);
 }
 </script>
@@ -17,7 +19,7 @@ let loadComponent = (component) => {
         <div class="flex max-w-[700px] w-full justify-around items-center">
 
             <div class="flex flex-col items-center h-full w-[15%]">
-                <Button icon="pi pi-dollar" rounded class="p-button-rounded p-button-text p-button-lg" severity="contrast" variant="text" @click="loadComponent('TheWelcome')" />
+                <Button icon="pi pi-dollar" rounded class="p-button-rounded p-button-text p-button-lg" severity="contrast" variant="text" @click="loadComponent('IncomeReg')" />
             </div>
 
             <!-- Search Icon -->
