@@ -1,4 +1,4 @@
-export class Outcome {
+export class Expense {
     id: string;
     amount: number;
     description: string;

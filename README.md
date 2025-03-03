@@ -62,3 +62,6 @@ npm run test:e2e -- --debug
 ```sh
 npm run lint
 ```
+
+use node version 22.13.1
+use npm version 10.9.2

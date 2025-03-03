@@ -11,18 +11,6 @@ onMounted(() => {
     
 });
 
-
-
-const products = ref([
-    { code: 1, name: 'Product 1', category: 'Category 1', quantity: 10 },
-    { code: 2, name: 'Product 2', category: 'Category 2', quantity: 20 },
-    { code: 3, name: 'Product 3', category: 'Category 3', quantity: 30 },
-    { code: 4, name: 'Product 4', category: 'Category 4', quantity: 40 },
-    { code: 4, name: 'Product 4', category: 'Category 4', quantity: 40 },
-    { code: 4, name: 'Product 4', category: 'Category 4', quantity: 40 },
-    { code: 4, name: 'Product 4', category: 'Category 4', quantity: 40 },
-
-]);
 const value = ref([
     { label: 'Groceries', color1: '#34d399', color2: '#fbbf24', value: 10, icon: 'pi pi-table' },
     { label: 'Entertainment', color1: '#fbbf24', color2: '#dedede', value: 11, icon: 'pi pi-game' },
@@ -33,11 +21,11 @@ const value = ref([
 import { useIncomeStore } from '@/stores/income';
 const incomeStore = useIncomeStore();
 
-import { useOutcomeStore } from '@/stores/outcome';
-const outcomeStore = useOutcomeStore();
+import { useExpenseStore } from '@/stores/expense';
+const expenseStore = useExpenseStore();
 
 const balance = computed(() => {
-    return incomeStore.incomeRef.amount - outcomeStore.totalOutcome;
+    return incomeStore.incomeRef.amount - expenseStore.totalExpense;
 });
 </script>
 
@@ -58,7 +46,7 @@ const balance = computed(() => {
                     <div class="flex flex-col w-full items-end">
                         <span class="text-xl font-bold income">+ $ {{incomeStore.incomeRef.amount}}</span>
                         <span class="text-gray-500 dark:text-gray-400">Income - {{incomeStore.formattedPayday}}</span>
-                        <span class="text-xl font-bold outcome">- $ {{outcomeStore.totalOutcome}}</span>
+                        <span class="text-xl font-bold outcome">- $ {{expenseStore.totalExpense}}</span>
                         <span class="text-gray-500 dark:text-gray-400">Outcome - up to date</span>
                         <div class="flex justify-end w-full">
                             <Button label="Income" icon="pi pi-plus" variant="text" severity="contrast" class="mt-4" />
@@ -98,7 +86,7 @@ const balance = computed(() => {
                 <h2 class="text-3xl font-bold">Expenses Summary</h2>
                 <p class="text-gray-500 dark:text-gray-400">Latest purchases</p>
                 <div class="h-[30vh] min-h-[250px]  overflow-hidden">
-                    <DataTable :value="outcomeStore.outcomeRef">
+                    <DataTable :value="expenseStore.expenseRef">
                         <Column field="description" header="Description"></Column>
                         <Column field="amount" header="Amount"></Column>
                     </DataTable>

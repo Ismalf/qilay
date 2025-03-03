@@ -1,11 +1,12 @@
 <script setup>
 import { defineEmits } from 'vue';
 import Button from 'primevue/button';
-import TheWelcome from "./TheWelcome.vue";
 import IncomeReg from './IncomeReg.vue';
+import ExpenseReg from './ExpenseReg.vue';
 const emit = defineEmits();
 const components = {
     IncomeReg,
+    ExpenseReg
 };
 
 let loadComponent = (component) => {
@@ -24,7 +25,7 @@ let loadComponent = (component) => {
 
             <!-- Search Icon -->
             <div class="flex flex-col items-center cursor-pointer h-full w-[15%]">
-                <Button icon="pi pi-plus" rounded class="p-button-rounded p-button-text p-button-lg" severity="contrast" variant="text" />
+                <Button icon="pi pi-plus" rounded class="p-button-rounded p-button-text p-button-lg" severity="contrast" variant="text" @click="loadComponent('ExpenseReg')"/>
             </div>
 
             <!-- Profile Icon -->
