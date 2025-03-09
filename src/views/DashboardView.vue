@@ -33,25 +33,31 @@ const balance = computed(() => {
 
     <div class="flex flex-col justify-left w-[90vw] pb-[10vh] max-w-[700px] self-center">
         <h1 class="text-3xl font-bold">Hello! :)</h1>
-        <div class="grid  grid-cols-2 md:grid-cols-4 gap-4 py-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-4 py-8">
             <div class=" md:col-span-2">
-                <div class="flex flex-col">
-                    <h2 class="text-4xl font-bold">Balance</h2>
-                    <p class="text-gray-500 dark:text-gray-400">Your current balance</p>
-                    <span class="text-5xl font-bold underline">$ {{balance}}</span>
+                <div class="flex md:flex-col w-full justify-between">
+                    <div class="flex flex-col">
+                        <h2 class="text-4xl font-bold">Balance</h2>
+                        <p class="display-none text-gray-500 dark:text-gray-400">Your current balance</p>
+                    </div>
+                    <span class="text-3xl md:text-5xl font-bold underline">${{balance}}</span>
                 </div>
             </div>
             <div class=" md:col-span-2">
                 <div class="flex justify-between items-center ">
-                    <div class="flex flex-col w-full items-end">
-                        <span class="text-xl font-bold income">+ $ {{incomeStore.incomeRef.amount}}</span>
-                        <span class="text-gray-500 dark:text-gray-400">Income - {{incomeStore.formattedPayday}}</span>
-                        <span class="text-xl font-bold outcome">- $ {{expenseStore.totalExpense}}</span>
-                        <span class="text-gray-500 dark:text-gray-400">Outcome - up to date</span>
-                        <div class="flex justify-end w-full">
+                    <div class="flex md:flex-col justify-between w-full ">
+                        <div class="flex flex-col md:items-end items-start w-full">
+                            <span class="text-xl font-bold income">+ $ {{incomeStore.incomeRef.amount}}</span>
+                            <span class="text-gray-500 dark:text-gray-400">Income - {{incomeStore.formattedPayday}}</span>
+                        </div>
+                        <div class="flex flex-col items-end w-full">
+                            <span class="text-xl font-bold outcome">- $ {{expenseStore.totalExpense}}</span>
+                            <span class="text-gray-500 dark:text-gray-400">Outcome - up to date</span>
+                        </div>
+                        <!-- <div class="flex justify-end w-full">
                             <Button label="Income" icon="pi pi-plus" variant="text" severity="contrast" class="mt-4" />
                             <Button label="Outcome" icon="pi pi-minus" variant="text" severity="contrast" class="mt-4" />
-                        </div>
+                        </div> -->
                     </div>
                     <!-- <div class="flex flex-col">    
                     </div>
